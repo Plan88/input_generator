@@ -9,7 +9,7 @@ class PyFile(Generator):
         self.path = path
 
     def gen(self, stdin: Path | None = None, stdout: Path | None = None):
-        cmd = f"python {str(self.path)}"
+        cmd = f"python3 {str(self.path)}"
         kwargs = {}
         if stdin is not None:
             kwargs["stdin"] = open(stdin, "r")
