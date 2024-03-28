@@ -15,7 +15,7 @@ def vec(
     min_len: int,
     max_len: int,
     zero_indexed: Annotated[bool, typer.Option("--zero-indexed")] = False,
-    display_length: Annotated[bool, typer.Option("--display-length")] = True,
+    no_display_length: Annotated[bool, typer.Option("--no-display-length")] = False,
     seed: Optional[int] = None,
 ):
     int_ = Int(min_len, max_len, seed=seed)
@@ -24,7 +24,7 @@ def vec(
     permutation = Permutation(zero_indexed, seed=seed)
     generated = permutation(length=length)
 
-    if display_length:
+    if not no_display_length:
         print(length)
     print(*generated)
 
@@ -36,7 +36,7 @@ def mat(
     min_width: int,
     max_width: int,
     zero_indexed: Annotated[bool, typer.Option("--zero-indexed")] = False,
-    display_length: Annotated[bool, typer.Option("--display-length")] = True,
+    no_display_length: Annotated[bool, typer.Option("--no-display-length")] = False,
     seed: Optional[int] = None,
 ):
     intH = Int(min_height, max_height, seed=seed)
@@ -48,7 +48,7 @@ def mat(
     permutation = Permutation(zero_indexed, seed=seed)
     generated = permutation(length=length)
 
-    if display_length:
+    if not no_display_length:
         print(H, W)
 
     for i in range(H * W, step=W):
