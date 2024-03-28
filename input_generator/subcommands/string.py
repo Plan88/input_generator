@@ -29,12 +29,12 @@ def _gen(
 
 
 @app.command()
-def vec(
+def line(
     min_len: int,
     max_len: int,
     char_type: Annotated[Optional[List[CharType]], typer.Option()] = [],
     additional_char: Annotated[Optional[str], typer.Option()] = "",
-    display_length: Annotated[bool, typer.Option("--display-length")] = True,
+    no_display_length: Annotated[bool, typer.Option("--no-display-length")] = True,
     allow_leading_zero: Annotated[bool, typer.Option("--allow-leading-zero")] = False,
     seed: Optional[int] = None,
 ):
@@ -58,20 +58,20 @@ def vec(
     if not allow_leading_zero and generated[0] == "0":
         generated[0] = "1"
 
-    if display_length:
+    if not no_display_length:
         print(length)
     print(generated)
 
 
 @app.command()
-def mat(
+def multilines(
     min_height: int,
     max_height: int,
     min_width: int,
     max_width: int,
     char_type: Annotated[Optional[List[CharType]], typer.Option()] = [],
     additional_char: Annotated[Optional[str], typer.Option()] = "",
-    display_length: Annotated[bool, typer.Option("--display-length")] = True,
+    no_display_length: Annotated[bool, typer.Option("--no-display-length")] = False,
     allow_leading_zero: Annotated[bool, typer.Option("--allow-leading-zero")] = False,
     seed: Optional[int] = None,
 ):
@@ -100,6 +100,6 @@ def mat(
     string_ = String(population, seed=seed)
     generated = "\n".join([string_(length=W) for _ in range(H)])
 
-    if display_length:
+    if not no_display_length:
         print(H, W)
     print(generated)
